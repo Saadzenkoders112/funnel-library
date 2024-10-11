@@ -21,7 +21,7 @@
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
-    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/click-events-have-key-events": 0,
     "prettier/prettier": 0,
     "max-lines-per-function": [
       "error",
