@@ -9,9 +9,12 @@ import {
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { routes } from '../../../data/route';
+import { useRouter } from 'next/navigation';
 
 const Sidebar = () => {
   const [profileOptions, setProfileOptions] = useState<boolean>(false);
+
+  const router = useRouter()
   return (
     <div className='mt-5 text-lg'>
       <ul className='p-1'>
@@ -47,10 +50,11 @@ const Sidebar = () => {
       <ul className='p-1'>
         {routes?.map((route, index) => (
           <li
+          onClick={() => router.push(`/dashboard/route/${route.route}`)}
             className='menu_bar_li'
             key={index}
           >
-            {route}
+            {route.name}
           </li>
         ))}
         <li className='menu_bar_li text-red-500'>
