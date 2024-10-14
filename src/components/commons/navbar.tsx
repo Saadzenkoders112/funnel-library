@@ -10,10 +10,11 @@ import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const pathName = usePathname();
+  const pathArray = pathName.split("/")
   const [profileOptions, setProfileOptions] = useState<boolean>(false);
   return (
     <div
-      className={`flex ${pathName === '/' ? 'bg-[#1E1362] text-white ' : 'bg-white text-black'} p-4`}
+      className={`flex ${pathArray.includes("route") ? 'bg-[#1E1362] text-white ' : 'bg-white text-black'} p-4`}
     >
       <div className='flex items-center justify-between w-full text-sm p-2'>
         <div></div>
