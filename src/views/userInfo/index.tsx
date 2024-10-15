@@ -3,6 +3,7 @@ import EmailTemplateCard from '@/components/cards/emailTemplateCard';
 import FunnelTemplateCard from '@/components/cards/funnelTemplateCard';
 import FunnelTitleCard from '@/components/cards/funnelTitleCard';
 import UserDetailsCard from '@/components/cards/userDetails';
+import PaginationStepper from '@/components/commons/paginationStepper';
 import { MoveLeft } from 'lucide-react';
 import React from 'react';
 
@@ -33,15 +34,7 @@ const UserInfoView = () => {
           {/* FUNNEL TEMPLATES */}
           <div className='flex justify-between items-center'>
             <p className='text-2xl font-bold'>Funnel</p>
-            <div className='flex gap-4 items-center font-bold'>
-              <p>Step 1 out of 2</p>
-              <button className='rounded-xl p-2 text-center text-sm border border-black'>
-                Prev
-              </button>
-              <button className='rounded-xl p-2 text-center text-sm border border-black'>
-                Next
-              </button>
-            </div>
+            <PaginationStepper />
           </div>
           <div className='flex gap-2 flex-wrap'>
             <FunnelTemplateCard />
