@@ -1,9 +1,11 @@
 import { ChevronLeft, Search } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 const SearchBar = () => {
+  const pathName = usePathname().split("/")
   return (
-    <div className='absolute bottom-4 w-full flex justify-center'>
+    <div className={`absolute bottom-4 w-full flex justify-center ${pathName.includes("creatorDetails") || pathName.includes('plans') ? "hidden": ""}`}>
       <div className='w-4/5 border bg-white text-black rounded-lg shadow-2xl flex items-center gap-4 p-2'>
         <div className='flex gap-2 items-center w-full'>
           <Search className='h-4 w-4 cursor-pointer' />

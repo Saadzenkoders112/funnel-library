@@ -13,7 +13,7 @@ const Filters = () => {
   const [filter, setFilter] = useState<boolean>(false);
   const pathName = usePathname().split('/');
   return (
-    <div className='flex relative sm:justify-start justify-end gap-8 items-start text-sm font-semibold'>
+    <div className={`flex relative sm:justify-start justify-end gap-8 items-start text-sm font-semibold ${pathName.includes('plans') ? "hidden": ""}`}>
       <div
         onClick={() => setFilter(!filter)}
         className='flex cursor-pointer items-center gap-2 bg-slate-100 rounded-xl p-2 relative'

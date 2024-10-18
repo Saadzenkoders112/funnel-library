@@ -3,13 +3,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import '@/styles/globals.css';
 import { Providers } from '@/providers';
-import { Book } from 'lucide-react';
+import { Book, MoveLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 import { routes } from '../../../../data/route';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import SearchBar from '@/components/searchBar';
 import Filters from '@/components/commons/filters';
+import UserDetailsCard from '@/components/cards/userDetails';
 
 export default function RootLayout({
   children,
@@ -19,10 +20,13 @@ export default function RootLayout({
   const [routeIndex, setRouteIndex] = useState<number>(0);
 
   const router = useRouter();
+
+  const pathName = usePathname().split('/');
   return (
     <div>
       <div className='w-full h-60 relative'>
         <Image
+          className={`${pathName.includes('creatorDetails') || pathName.includes('plans') ? 'hidden' : ''}`}
           src='/assets/images/dashboard_img.jpg'
           alt='dashboard_img'
           width={1600}
@@ -31,14 +35,18 @@ export default function RootLayout({
         />
 
         {/* DIV TEXT */}
-        <div className='absolute top-0 left-0 h-full flex justify-center w-full mt-6'>
+        <div
+          className={`absolute top-0 left-0 h-full flex justify-center w-full mt-6 ${pathName.includes('creatorDetails') || pathName.includes('plans') ? 'hidden' : ''}`}
+        >
           <div className='flex flex-col gap-4 items-center w-[550px]'>
             <div className='flex items-center gap-2 text-white'>
               <Book className='h-4 w-4' />
               <p>Increase your Funnel Conversion</p>
             </div>
             <p className='text-3xl font-semibold text-white '>
-              The High Converting Funnels
+              {pathName.includes('subscription')
+                ? 'The High Converting Funnels'
+                : ''}
             </p>
             <p className='text-gray-400 text-center'>
               We have the collection of popular marketing funnels that you can
@@ -47,12 +55,31 @@ export default function RootLayout({
           </div>
         </div>
 
+        <div
+          className={`h-60 flex-col gap-2 ${pathName.includes('creatorDetails') ? 'flex' : 'hidden'}`}
+        >
+          <div className='flex'>
+            <div className='flex items-center gap-2 font-bold text-xs w-full justify-center'>
+              <MoveLeft className='h-4 w-4' />
+              <span>Creators</span>
+            </div>
+            <button className='p-1 rounded-xl border-2 border-black text-semibold text-center'>
+              Follow
+            </button>
+          </div>
+          <div className='flex justify-center'>
+            <UserDetailsCard />
+          </div>
+        </div>
+
         {/* SEARCH DIV */}
         <SearchBar />
 
         <div className='flex justify-center'>
           <div className='w-11/12 p-8 flex flex-col gap-4'>
-            <div className='sm:flex items-center gap-4 hidden'>
+            <div
+              className={` items-center gap-4 hidden ${pathName.includes('creatorDetails') || pathName.includes('plans') ? 'hidden' : 'sm:flex'}`}
+            >
               {routes?.map((route, index) => (
                 <button
                   onClick={() => {

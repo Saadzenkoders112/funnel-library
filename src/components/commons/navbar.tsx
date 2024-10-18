@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Sidebar from './sidebar';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -14,7 +15,7 @@ const Navbar = () => {
   const [profileOptions, setProfileOptions] = useState<boolean>(false);
   return (
     <div
-      className={`flex ${pathArray.includes("route") ? 'bg-[#1E1362] text-white ' : 'bg-white text-black'} p-4`}
+      className={`flex ${pathArray.includes("route") && !pathArray.includes("plans") && !pathArray.includes("creatorDetails") ? 'bg-[#1E1362] text-white ' : 'bg-white text-black'} p-4`}
     >
       <div className='flex items-center justify-between w-full text-sm p-2'>
         <div></div>
@@ -64,19 +65,19 @@ const Navbar = () => {
             <p>Adam</p>
           </li>
           {profileOptions && (
-            <ul className='absolute top-10 right-0 bg-white rounded-lg shadow-2xl text-black p-1 z-10'>
-              <li className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
+            <ul className='absolute top-10 right-0 bg-white rounded-lg shadow-2xl text-black p-4 z-10'>
+              <Link href="/dashboard/bookmarks" className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
                 <Bookmark className='h-4 w-4' />
                 <p>Collections</p>
-              </li>
+              </Link>
               <li className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
                 <Settings2 className='w-4 h-4' />
                 <p>Settings</p>
               </li>
-              <li className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
+              <Link href="/dashboard/route/subscription/plans" className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
                 <AppWindow className='h-4 w-4' />
                 <p>Subscription</p>
-              </li>
+              </Link>
               <li className='flex items-center gap-2 p-1 cursor-pointer hover:bg-slate-100 duration-200'>
                 <LogOut className='h-4 w-4' />
                 <p>Logout</p>
